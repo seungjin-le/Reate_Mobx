@@ -3,38 +3,29 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { autorun, makeObservable, observable } from 'mobx';
+import PersonContext from './contexts/PersonContext';
+import PersonStore from './stores/PersonStore';
 
-const isLogin = observable(true);
-const person = observable({
-  name: 'mark',
-  age: 30,
-});
-class PersonStore {
-  @observable
-  name = 'Two';
+//const isLogin = observable(true);
+// const person = observable({
+//   name: 'mark',
+//   age: 30,
+// });
+//autorun(() => {
+//   console.log(isLogin.get());
+//   console.log(person.age);
+// });
+//isLogin.set(false);
+// person.age = 40;
 
-  @observable
-  age = 20;
-
-  constructor() {
-    makeObservable(this);
-  }
-}
 const personStore = new PersonStore();
 
-autorun(() => {
-  console.log(isLogin.get());
-  console.log(person.age);
-  console.log(personStore.age);
-});
-
-isLogin.set(false);
-person.age = 40;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <PersonContext.Provider value={personStore}>
+      <App />
+    </PersonContext.Provider>
   </React.StrictMode>
 );
 
