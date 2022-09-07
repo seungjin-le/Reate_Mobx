@@ -10,7 +10,8 @@ function App() {
     return Math.floor(personStore.age / 10) * 10;
   }).get();
   const click = () => {
-    personStore.plus();
+    personStore.age = 40;
+    personStore.name = 'LeeSeung';
   };
   console.log('render');
   return (
@@ -18,7 +19,9 @@ function App() {
       <div>
         <button onClick={click}>click</button>
       </div>
-      <p>{age10}</p>
+      <p>
+        {personStore.age}, {personStore.name}
+      </p>
     </div>
   );
 }
